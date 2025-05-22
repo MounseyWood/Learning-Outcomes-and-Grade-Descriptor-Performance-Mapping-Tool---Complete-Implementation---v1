@@ -78,7 +78,7 @@
             font-size: 24px;
         }
         
-        /* Improved image handling based on understanding_grade_descriptors_v4.html */
+        /* Improved image handling */
         .logo {
             max-width: 320px;
             margin: 0 auto 15px;
@@ -189,6 +189,7 @@
             border-color: #333;
             font-weight: bold;
         }
+        
         .ku-button {
             display: inline-block;
             background-color: var(--ksa-yellow);
@@ -358,6 +359,7 @@
             z-index: 1000;
             border-radius: 2px;
         }
+        
         /* For improvement analysis */
         .improvement-positive {
             color: #52c41a;
@@ -604,7 +606,7 @@
             </div>
         </div>
         
-        <!-- Grade Descriptor Matrix Modal with LO6 added -->
+        <!-- Grade Descriptor Matrix Modal -->
         <div id="matrix-modal" class="modal" role="dialog" aria-labelledby="matrix-title" aria-modal="true" aria-hidden="true">
             <div class="modal-content">
                 <button type="button" class="close-modal" id="close-matrix" aria-label="Close matrix">&times;</button>
@@ -700,7 +702,7 @@
             </div>
         </div>
         
-        <!-- Compare Profiles Modal with improved accessibility and student name column -->
+        <!-- Compare Profiles Modal -->
         <div id="compare-modal" class="modal" role="dialog" aria-labelledby="compare-title" aria-modal="true" aria-hidden="true">
             <div class="modal-content">
                 <button type="button" class="close-modal" id="close-compare" aria-label="Close comparison">&times;</button>
@@ -739,12 +741,14 @@
                 </div>
             </div>
         </div>
-     <!-- Header band with improved image handling -->
+
+        <!-- Header band -->
         <header class="content-band header-band" role="banner">
             <div class="band-content header-content">
                 <img src="Talk_Performance_Mapping_FN4004.png" alt="FN4004 Performance Mapping Tool" class="logo">
             </div>
         </header>
+        
         <!-- Getting Started band -->
         <section class="content-band getting-started-band" aria-labelledby="getting-started-title">
             <div class="band-content getting-started-content">
@@ -791,7 +795,7 @@
             </div>
         </section>
         
-        <!-- Note box placed outside the blue background with white background -->
+        <!-- Note box -->
         <section class="content-band" style="background-color: #f9f9f9; padding: 10px 0;">
             <div class="band-content">
                 <div class="note-box" role="note">
@@ -800,7 +804,7 @@
             </div>
         </section>
 
-        <!-- Student Name Input Section with improved mobile centering -->
+        <!-- Student Name Input Section -->
         <section class="content-band" style="background-color: white; padding: 10px 0;">
             <div class="band-content">
                 <div class="student-name-container">
@@ -815,7 +819,8 @@
                 </div>
             </div>
         </section>
-      <!-- Main assessment tool -->
+
+        <!-- Main assessment tool -->
         <main class="content-band" aria-labelledby="assessment-title">
             <div class="band-content">
                 <h2 id="assessment-title" class="sr-only">Assessment Tool</h2>
@@ -872,7 +877,8 @@
                         <!-- Detailed feedback cards will be generated here by JavaScript -->
                     </div>
                 </div>
-                <!-- Key Areas for Improvement / Overall Advice section - Now with blue background & white text -->
+                
+                <!-- Key Areas for Improvement section -->
                 <div id="improvement-section" class="improvement-section">
                     <h2>How to improve your overall grade:</h2>
                     
@@ -887,13 +893,12 @@
                     </ul>
                 </div>
                 
-                <!-- Action buttons with improved accessibility -->
+                <!-- Action buttons -->
                 <div class="action-buttons">
                     <button id="save-profile-btn" class="ku-button" aria-label="Save your assessment profile to your device">
                         Save My Assessment Profile
                     </button>
                     
-                    <!-- Load Profile Button -->
                     <button id="load-profile-btn" class="ku-button" aria-label="Load a previously saved assessment profile">
                         Load Previous Assessment
                     </button>
@@ -946,7 +951,7 @@
                     <p>Note: This is a visual interpretation of the Kingston School of Art BA (Hons) Fashion grade descriptors for FN4004. Always refer to the official grade descriptors in your course handbook for definitive guidance.</p>
                 </div>
                 
-                <!-- Success message with improved accessibility -->
+                <!-- Success message -->
                 <div id="success-message" class="success-message" role="alert" aria-live="polite">
                     <div style="display: flex; align-items: center;">
                         <div style="margin-right: 10px;">✓</div>
@@ -962,6 +967,7 @@
         <!-- Hidden file input for profile upload -->
         <input type="file" id="profile-upload" accept=".json" style="display: none;" aria-hidden="true">
     </div>
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Learning outcomes data
@@ -1225,7 +1231,8 @@
                 }
             }
         ];
-      // Grade bands data with step marking
+
+        // Grade bands data with step marking
         const gradeBands = [
             { 
                 id: 'first-plus', 
@@ -1377,6 +1384,7 @@
                 'Develop your professional network and industry connections'
             ]
         };
+
         // Default performance levels
         let performanceLevels = {
             outcome1: { bandId: 'first', percentage: '78%' },
@@ -1415,14 +1423,15 @@
         
         // Success message
         const successMessage = document.getElementById('success-message');
-        
+
         // Initialize UI
         initializeUI();
         updateAllContent();
         
         // Check for saved profiles
         checkSavedProfiles();
-      // Initialize the UI components
+
+        // Initialize the UI components
         function initializeUI() {
             // Create outcome inputs
             outcomeContainer.innerHTML = '';
@@ -1581,6 +1590,7 @@
             // Announce the change
             liveRegion.textContent = `${outcome.title} grade changed to ${band.title}, ${percentage}`;
         }
+
         // Update UI for a specific outcome
         function updateUI(outcomeId) {
             // Update grade band containers
@@ -1737,7 +1747,8 @@
                 ctx.stroke();
             });
         }
-      // Calculate and update average grade
+
+        // Calculate and update average grade
         function updateAverageGrade() {
             // Convert percentage strings to numbers
             const percentages = Object.values(performanceLevels).map(level => 
@@ -1898,50 +1909,8 @@
                 });
             }
         }
-      // Save the current profile as a downloadable JSON file with student name
-        function saveProfile() {
-            // Get student name
-            const studentNameInput = document.getElementById('student-name');
-            const studentName = studentNameInput.value.trim() || 'Anonymous Student';
-            
-            // Create a profile object
-            const now = new Date();
-            const dateString = now.toISOString().slice(0, 10);
-            const timeString = now.toTimeString().slice(0, 5);
-            
-            // Calculate average grade for the profile
-            const percentages = Object.values(performanceLevels).map(level => 
-                parseFloat(level.percentage.replace('%', ''))
-            );
-            
-            const average = percentages.reduce((sum, val) => sum + val, 0) / percentages.length;
-            
-            // Round to nearest step mark (X8, X5, X2, X0)
-            let roundedAverage;
-            if (average % 10 <= 1) roundedAverage = Math.floor(average / 10) * 10;
-            else if (average % 10 <= 3.5) roundedAverage = Math.floor(average / 10) * 10 + 2;
-            else if (average % 10 <= 6.5) roundedAverage = Math.floor(average / 10) * 10 + 5;
-            else if (average % 10 <= 9) roundedAverage = Math.floor(average / 10) * 10 + 8;
-            else roundedAverage = Math.ceil(average / 10) * 10;
-            
-            // Find grade band
-            let gradeBandId = null;
-            let gradeBandTitle = '';
-            let letterGrade = '';
-            
-            for (const band of gradeBands) {
-                // Special handling for first-plus
-                if (band.id === 'first-plus' && roundedAverage >= 85) {
-                    gradeBandId = band.id;
-                    gradeBandTitle = band.title;
-                    letterGrade = band.letterGrade;
-                    break;
-                } 
-                // For other bands
-                else if (band.id !== 'first-plus') {
-                    const rangeText = band.range.split('-');
-                    if (rangeText.length
-                 // Save the current profile as a downloadable JSON file with student name
+
+        // Save the current profile as a downloadable JSON file with student name
         function saveProfile() {
             // Get student name
             const studentNameInput = document.getElementById('student-name');
@@ -2208,7 +2177,8 @@
             // Announce the load
             liveRegion.textContent = `Previous assessment profile ${filename} loaded successfully. You can now compare your current assessment with this previous one.`;
         }
-         // Update compare modal with fixed comparison logic
+
+        // Update compare modal with fixed comparison logic
         function updateCompareModal() {
             const hasProfilesDiv = document.getElementById('has-profiles');
             const noProfilesDiv = document.getElementById('no-profiles');
@@ -2756,7 +2726,8 @@
                 printWindow.print();
             }, 500);
         }
-       // Modal accessibility functions
+
+        // Modal accessibility functions
         function trapFocusInModal(modal) {
             const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
             if (focusableElements.length === 0) return;
@@ -2879,4 +2850,4 @@
     });
     </script>
 </body>
-</html>           
+</html>
